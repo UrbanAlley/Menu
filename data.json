@@ -1,0 +1,100 @@
+{
+  "appetizers": [
+    {
+      "name": "香噴噴豆乳雞",
+      "engName": "Taiwanese Popcorn Chicken",
+      "jpName": "マリネしたクリスピーチキン",
+      "price": 220,
+      "image": "./pic/pic_1.png"
+    },
+    {
+      "name": "逅巷炸雞翅",
+      "engName": "Fried Chicken Wings",
+      "jpName": "フライドチキンウィング",
+      "price": 220,
+      "image": "./pic/pic_2.png"
+    },
+    {
+      "name": "烤櫛瓜",
+      "engName": "Grilled Zucchini",
+      "jpName": "焼きズッキーニ",
+      "price": 200,
+      "image": "./pic/pic_3.png"
+    },
+    {
+      "name": "蒜香辣薯條",
+      "engName": "Garlic Spicy Fries",
+      "jpName": "ニンニク辛口フライドポテト",
+      "price": 200,
+      "image": "./pic/pic_4.png"
+    }
+  ],
+  "mainDishes": [
+    {
+      "name": "自製午仔魚一夜干",
+      "engName": "Homemade Dried Fish",
+      "jpName": "自家製ツバメコノシロの一夜干し",
+      "price": 360,
+      "image": "./pic/pic_5.png"
+    },
+    {
+      "name": "炸中卷佐塔塔醬",
+      "engName": "Fried Squid with Tartar Sauce",
+      "jpName": "イカフライ タルタルソース添え",
+      "price": 320,
+      "image": "./pic/pic_6.png"
+    },
+    {
+      "name": "丹尼特製乾咖哩",
+      "engName": "Danny's Special Dry Curry",
+      "jpName": "ダニー特製ドライカレー",
+      "price": 350,
+      "image": "./pic/pic_7.png"
+    },
+    {
+      "name": "清炒義大利麵",
+      "engName": "Sautéed Italian Pasta",
+      "jpName": "あっさりパスタソテー",
+      "price": 250,
+      "image": "./pic/pic_8.png"
+    }
+  ],
+  "beerWine": {
+    "draftBeer": {
+      "description": [
+        "Eight rotating craft beers on tap - ask your server for today's selection",
+        "八款輪替精釀生啤 - 請向服務人員詢問今日供應",
+        "８種のクラフトビールが日替わりで楽しめます - スタッフにお尋ねください"
+      ],
+      "options": [
+        {
+          "size": "Pint (473ml)",
+          "price": "200-300"
+        },
+        {
+          "size": "Half Pint (285ml)",
+          "price": "150-200"
+        }
+      ]
+    },
+    "bottledBeer": {
+      "description": [
+        "Selection of local and imported craft beer - see our beer cooler",
+        "精選本地及進口瓶裝精釀 - 歡迎查看啤酒冰櫃",
+        "地元産と輸入クラフトビールの品揃え - ビールクーラーをご覧ください"
+      ]
+    },
+    "wine": {
+      "options": [
+        {
+          "size": "Red / White (Glass)",
+          "price": "180"
+        },
+        {
+          "size": "Red / White (Bottle)",
+          "price": "880"
+        }
+      ]
+    }
+  }
+}
