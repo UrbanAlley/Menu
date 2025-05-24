@@ -27,6 +27,13 @@
       "jpName": "ニンニク辛口フライドポテト",
       "price": 200,
       "image": "./pic/pic_4.png"
+    },
+    {
+      "name": "玉米肋排",
+      "engName": "Corn Ribs",
+      "jpName": "コーンリブ",
+      "price": 220,
+      "image": "./pic/pic_4.png"
     }
   ],
   "mainDishes": [
@@ -56,6 +63,13 @@
       "engName": "Sautéed Italian Pasta",
       "jpName": "あっさりパスタソテー",
       "price": 250,
+      "image": "./pic/pic_8.png"
+    },
+    {
+      "name": "炸魚薯條",
+      "engName": "Fish and Chips",
+      "jpName": "フィッシュアンドチップス",
+      "price": 350,
       "image": "./pic/pic_8.png"
     }
   ],
@@ -87,12 +101,12 @@
     "wine": {
       "options": [
         {
-          "size": "Red / White (Glass)",
-          "price": "180"
+          "size": "Valdecuevas (White wine)",
+          "price": "1500"
         },
         {
-          "size": "Red / White (Bottle)",
-          "price": "880"
+          "size": "Cantovera 9. (Red wine)",
+          "price": "1500"
         }
       ]
     }
