@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: #333;
+      background-color: #f5f3e9;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .menu-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      border: 1px solid #ddd;
+    }
+    
+    .menu-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #444;
+      position: relative;
+    }
+    
+    .menu-header:after {
+      content: "";
+      position: absolute;
+      bottom: -7px;
+      left: 25%;
+      width: 50%;
+      height: 2px;
+      background-color: #444;
+    }
+    
+    .menu-title {
+      font-size: 42px;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 2px;
+      color: #222;
+    }
+    
+    .menu-subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      margin: 5px 0 15px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #777;
+    }
+    
+    .menu-section {
+      margin-bottom: 40px;
+    }
+    
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #333;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+      position: relative;
+    }
+    
+    .section-title:after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: #b38a58;
+    }
+    
+    .item {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px dotted #ddd;
+      position: relative;
+      display: flex;
+      flex-direction: row;
+    }
+    
+    .item:last-child {
+      border-bottom: none;
+    }
+    
+    .item-image {
+      width: 120px;
+      height: 120px;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-right: 20px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .item-image img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
+    
+    .item-content {
+      flex-grow: 1;
+      position: relative;
+      padding-right: 60px;
+    }
+    
+    .item-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 5px;
+      color: #222;
+    }
+    
+    .item-eng {
+      font-size: 14px;
+      font-style: italic;
+      color: #777;
+      margin: 0 0 5px;
+    }
+    
+    .item-jp {
+      font-size: 14px;
+      margin: 0 0 5px;
+      color: #555;
+    }
+    
+    .item-price {
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #b38a58;
+    }
+    
+    .beer-section {
+      background-color: #f9f7f0;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 40px;
+    }
+    
+    .beer-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 15px;
+      color: #333;
+    }
+    
+    .beer-description {
+      font-size: 14px;
+      margin: 0 0 10px;
+      color: #555;
+    }
+    
+    .beer-options {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    
+    .beer-option {
+      text-align: center;
+      font-size: 14px;
+    }
+    
+    .beer-size {
+      font-weight: 600;
+      color: #222;
+    }
+    
+    .beer-price {
+      color: #b38a58;
+    }
+    
+    .menu-footer {
+      text-align: center;
+      margin-top: 40px;
+      font-style: italic;
+      color: #777;
+      font-size: 14px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+    }
+    
+    .craft-beer-icon {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .craft-beer-icon svg {
+      width: 50px;
+      height: 50px;
+      fill: #b38a58;
+    }
+    
+    .file-upload {
+      margin-bottom: 20px;
+      text-align: center;
+      padding: 20px;
+      background-color: #f9f7f0;
+      border-radius: 5px;
+      border: 2px dashed #ddd;
+    }
+    
+    .file-upload-button {
+      background-color: #b38a58;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    
+    .file-upload-button:hover {
+      background-color: #a37947;
+    }
+    
+    .loading {
+      text-align: center;
+      margin: 20px 0;
+      display: none;
+    }
+    
+    .loading-spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #b38a58;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 2s linear infinite;
+      margin: 0 auto 10px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      .menu-container {
+        padding: 15px;
+      }
+      
+      .menu-title {
+        font-size: 32px;
+      }
+      
+      .section-title {
+        font-size: 20px;
+      }
+      
+      .item {
+        flex-direction: column;
+      }
+      
+      .item-image {
+        width: 100%;
+        height: 180px;
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+      
+      .item-content {
+        padding-right: 0;
+      }
+      
+      .item-name {
+        font-size: 16px;
+        margin-right: 60px;
+      }
+      
+      .item-price {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-container">
+<!--     <div class="file-upload">
+      <button class="file-upload-button" onclick="loadMenuFromFixedPath()">重新載入菜單</button>
+    </div> -->
+    
+    <div class="loading" id="loadingIndicator">
+      <div class="loading-spinner"></div>
+      <p>正在讀取菜單數據...</p>
+    </div>
+    
+    <div class="menu-header">
+      <h1 class="menu-title">逅巷 Urban Alley</h1>
+      <p class="menu-subtitle">精釀啤酒 × 美食空間</p>
+      <div class="craft-beer-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M11 13h2v6h-2v-6zM9 8h6v3h-6v-3zM12 1c-3.3 0-6 2.7-6 6v14c0 1.6 1.3 3 3 3h6c1.6 0 3-1.3 3-3v-14c0-3.3-2.7-6-6-6zM12 3c2.2 0 4 1.8 4 4v2h-8v-2c0-2.2 1.8-4 4-4z"/>
+        </svg>
+      </div>
+    </div>
+    
+    <div id="menuContent">
+      <!-- Menu content will be generated here by JavaScript -->
+    </div>
+    
+    <div class="menu-footer">
+      <p>Brewing memories, one craft at a time</p>
+      <p>在啤酒與美食間，編織專屬回憶</p>
+      <p>一杯一杯と、思い出を醸造する</p>
+    </div>
+  </div>
+  
+  <script>
+    
+    // Sample data structure to use if no file is uploaded
+    const sampleMenuData = {
+      appetizers: [
+        { name: '香酥啤香乳雞', engName: 'Crispy Beer-marinated Chicken', jpName: 'ビールに漬けたサクサクチキン', price: 220, image: './pic/pic_1.png' },
+        { name: '蒜香辣醬薯條', engName: 'Garlic Spicy Fries', jpName: 'ニンニク辛口フライドポテト', price: 200, image: './pic/pic_2.png' },
+        { name: '烤櫛瓜', engName: 'Grilled Zucchini', jpName: '焼きズッキーニ', price: 200, image: './pic/pic_3.png' },
+        { name: '起士炸雞翅', engName: 'Cheese Fried Chicken Wings', jpName: 'チーズフライドチキンウィング', price: 220, image: './pic/pic_4.png' }
+      ],
+      mainDishes: [
+        { name: '自製牛仔魚一夜干', engName: 'Homemade Dried Cowfish', jpName: '自家製カウフィッシュの一夜干し', price: 360, image: './pic/pic_5.png' },
+        { name: '炸中卷佐塔塔醬', engName: 'Fried Squid with Tartar Sauce', jpName: 'イカフライ タルタルソース添え', price: 320, image: './pic/pic_6.png' },
+        { name: '丹尼特製乾咖哩', engName: 'Danny\'s Special Dry Curry', jpName: 'ダニー特製ドライカレー', price: 350, image: './pic/pic_7.png' },
+        { name: '清炒義大利麵', engName: 'Sautéed Italian Pasta', jpName: 'あっさりパスタソテー', price: 250, image: './pic/pic_8.png' }
+      ],
+      beerWine: {
+        draftBeer: {
+          description: [
+            'Eight rotating craft beers on tap - ask your server for today\'s selection',
+            '八款輪替精釀生啤 - 請向服務人員詢問今日供應',
+            '８種のクラフトビールが日替わりで楽しめます - スタッフにお尋ねください'
+          ],
+          options: [
+            { size: 'Pint (473ml)', price: '200-300' },
+            { size: 'Half Pint (285ml)', price: '150-200' }
+          ]
+        },
+        bottledBeer: {
+          description: [
+            'Selection of local and imported craft beer - see our beer cooler',
+            '精選本地及進口瓶裝精釀 - 歡迎查看啤酒冰櫃',
+            '地元産と輸入クラフトビールの品揃え - ビールクーラーをご覧ください'
+          ]
+        },
+        wine: {
+          options: [
+            { size: 'Red / White (Glass)', price: '180' },
+            { size: 'Red / White (Bottle)', price: '880' }
+          ]
+        }
+      }
+    };
+
+    // Load sample data when page loads
+    window.onload = function() {
+      loadMenuFromFixedPath();
+    };
+
+    // 讀取固定路徑的Excel檔案
+    function loadMenuFromFixedPath() {
+      const fixedFilePath = './data.json'; // 固定的檔案路徑
+      document.getElementById('loadingIndicator').style.display = 'block';
+      
+      // 使用fetch API讀取檔案
+      fetch(fixedFilePath)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('找不到菜單檔案。請確保 menu_data.xlsx 存在於正確位置。');
+          }
+          return response.json();
+        })
+        .then(json => {
+          // const menuData = processData(json);
+          
+          // 渲染菜單
+          renderMenu(json);
+        })
+        .catch(error => {
+          console.error('讀取檔案錯誤:', error);
+          alert('無法讀取菜單檔案。使用預設菜單。\n錯誤: ' + error.message);
+          // 使用預設數據
+          renderMenu(sampleMenuData);
+        })
+        .finally(() => {
+          document.getElementById('loadingIndicator').style.display = 'none';
+        });
+    }
+    
+
+    function processData(json) {
+      // Expected sheet names and structure
+      const menuData = {
+        appetizers: [],
+        mainDishes: [],
+        beerWine: {
+          draftBeer: {
+            description: [],
+            options: []
+          },
+          bottledBeer: {
+            description: []
+          },
+          wine: {
+            options: []
+          }
+        }
+      };
+      
+      // Process appetizers sheet
+      if (workbook.SheetNames.includes('Appetizers')) {
+        const sheet = workbook.Sheets['Appetizers'];
+        const jsonData = XLSX.utils.sheet_to_json(sheet);
+        
+        jsonData.forEach(row => {
+          if (row.name && row.price) {
+            menuData.appetizers.push({
+              name: row.name || '',
+              engName: row.engName || '',
+              jpName: row.jpName || '',
+              price: row.price || 0,
+              image: row.image || './pic/pic_1.png'
+            });
+            console.info('add appetizers:', row.name);
+          }
+        });
+      }
+      
+      // Process main dishes sheet
+      if (workbook.SheetNames.includes('MainDishes')) {
+        const sheet = workbook.Sheets['MainDishes'];
+        const jsonData = XLSX.utils.sheet_to_json(sheet);
+        
+        jsonData.forEach(row => {
+          if (row.name && row.price) {
+            menuData.mainDishes.push({
+              name: row.name || '',
+              engName: row.engName || '',
+              jpName: row.jpName || '',
+              price: row.price || 0,
+              image: row.image || './pic/pic_1.png'
+            });
+            console.info('add mainDishes:', row.name);
+          }
+        });
+      }
+      
+      // Process beer and wine sheet
+      if (workbook.SheetNames.includes('BeerWine')) {
+        const sheet = workbook.Sheets['BeerWine'];
+        const jsonData = XLSX.utils.sheet_to_json(sheet);
+        
+        jsonData.forEach(row => {
+          // Process based on the type field
+          if (row.type === 'draftBeerDesc') {
+            menuData.beerWine.draftBeer.description.push(row.description || '');
+          } else if (row.type === 'draftBeerOption') {
+            menuData.beerWine.draftBeer.options.push({
+              size: row.size || '',
+              price: row.price || ''
+            });
+          } else if (row.type === 'bottledBeerDesc') {
+            menuData.beerWine.bottledBeer.description.push(row.description || '');
+          } else if (row.type === 'wineOption') {
+            menuData.beerWine.wine.options.push({
+              size: row.size || '',
+              price: row.price || ''
+            });
+          }
+        });
+      }
+      
+      // If no data was found in the sheets, use the sample data
+      if (menuData.appetizers.length === 0 && menuData.mainDishes.length === 0) {
+        return sampleMenuData;
+      }
+      
+      return menuData;
+    }
+
+    function renderMenu(menuData) {
+      const menuContentElement = document.getElementById('menuContent');
+      menuContentElement.innerHTML = '';
+      
+      // Render appetizers section
+      if (menuData.appetizers && menuData.appetizers.length > 0) {
+        const appetizersSection = document.createElement('div');
+        appetizersSection.className = 'menu-section';
+        appetizersSection.innerHTML = `<h2 class="section-title">開胃小食 | APPETIZERS | 前菜</h2>`;
+        
+        menuData.appetizers.forEach(item => {
+          appetizersSection.innerHTML += renderMenuItem(item);
+        });
+        
+        menuContentElement.appendChild(appetizersSection);
+      }
+      
+      // Render main dishes section
+      if (menuData.mainDishes && menuData.mainDishes.length > 0) {
+        const mainDishesSection = document.createElement('div');
+        mainDishesSection.className = 'menu-section';
+        mainDishesSection.innerHTML = `<h2 class="section-title">主食料理 | MAIN DISHES | メイン料理</h2>`;
+        
+        menuData.mainDishes.forEach(item => {
+          mainDishesSection.innerHTML += renderMenuItem(item);
+        });
+        
+        menuContentElement.appendChild(mainDishesSection);
+      }
+      
+      // Render beer and wine section
+      if (menuData.beerWine) {
+        const beerWineSection = document.createElement('div');
+        beerWineSection.className = 'beer-section';
+        
+        // Add section title
+        beerWineSection.innerHTML = `<h2 class="section-title">精釀啤酒 & 葡萄酒 | CRAFT BEER & WINE</h2>`;
+        
+        // Add draft beer section
+        if (menuData.beerWine.draftBeer) {
+          beerWineSection.innerHTML += `<h3 class="beer-title">CRAFT BEER ON TAP | 生啤酒</h3>`;
+          
+          // Add descriptions
+          if (menuData.beerWine.draftBeer.description) {
+            menuData.beerWine.draftBeer.description.forEach(desc => {
+              beerWineSection.innerHTML += `<p class="beer-description">${desc}</p>`;
+            });
+          }
+          
+          // Add options
+          if (menuData.beerWine.draftBeer.options && menuData.beerWine.draftBeer.options.length > 0) {
+            const optionsHTML = `
+              <div class="beer-options">
+                ${menuData.beerWine.draftBeer.options.map(option => `
+                  <div class="beer-option">
+                    <div class="beer-size">${option.size}</div>
+                    <div class="beer-price">$${option.price}</div>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+            beerWineSection.innerHTML += optionsHTML;
+          }
+        }
+        
+        // Add bottled beer section
+        if (menuData.beerWine.bottledBeer) {
+          beerWineSection.innerHTML += `<h3 class="beer-title" style="margin-top: 25px;">BOTTLED CRAFT BEER | 瓶裝精釀</h3>`;
+          
+          // Add descriptions
+          if (menuData.beerWine.bottledBeer.description) {
+            menuData.beerWine.bottledBeer.description.forEach(desc => {
+              beerWineSection.innerHTML += `<p class="beer-description">${desc}</p>`;
+            });
+          }
+        }
+        
+        // Add wine section
+        if (menuData.beerWine.wine) {
+          beerWineSection.innerHTML += `<h3 class="beer-title" style="margin-top: 25px;">HOUSE WINE | 店內精選葡萄酒</h3>`;
+          
+          // Add options
+          if (menuData.beerWine.wine.options && menuData.beerWine.wine.options.length > 0) {
+            const optionsHTML = `
+              <div class="beer-options">
+                ${menuData.beerWine.wine.options.map(option => `
+                  <div class="beer-option">
+                    <div class="beer-size">${option.size}</div>
+                    <div class="beer-price">$${option.price}</div>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+            beerWineSection.innerHTML += optionsHTML;
+          }
+        }
+        
+        menuContentElement.appendChild(beerWineSection);
+      }
+    }
+
+    function renderMenuItem(item) {
+      return `
+        <div class="item">
+          <div class="item-image">
+            <img src="${item.image}" alt="${item.name}" />
+          </div>
+          <div class="item-content">
+
+            <h3 class="item-name">${item.name}</h3>
+            <p class="item-eng">${item.engName}</p>
+            <p class="item-jp">${item.jpName}</p>
+            <span class="item-price">$${item.price}</span>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
